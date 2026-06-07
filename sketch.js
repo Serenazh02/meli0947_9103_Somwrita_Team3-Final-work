@@ -88,7 +88,10 @@ function draw() {
       ellipse(s.x, s.y, sz * 4, sz * 4);
     }
     fill(210, 225, 255, alpha);
-    ellipse(s.x + s.px, s.y + s.py, sz, sz);
+    let d = dist(mouseX, mouseY, s.x + s.px, s.y + s.py);
+    let influence = map(d, 0, 150, 40, 0, true);
+    let angle = noise(s.noiseOffset + frameCount * 0.01) * TWO_PI;
+    ellipse(s.x + s.px + cos(angle) * influence, s.y + s.py + sin(angle) * influence, sz, sz);
     if (s.size > 2.2 && tw > 0.5) {
       stroke(220, 235, 255, alpha * 0.6);
       strokeWeight(0.5);
