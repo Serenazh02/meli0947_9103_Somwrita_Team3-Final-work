@@ -18,7 +18,8 @@ function initScene() {
       size: random(0.5, 2.8),
       bright: random(150, 255),
       twinkleSpeed: random(0.01, 0.04),
-      twinkleOffset: random(TWO_PI)
+      twinkleOffset: random(TWO_PI),
+      noiseOffset: random(1000) // Each star's independent noise seed
     });
   }
 
