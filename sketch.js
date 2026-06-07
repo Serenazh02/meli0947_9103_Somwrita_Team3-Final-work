@@ -77,8 +77,8 @@ function draw() {
 
   noStroke();
   for (let s of stars) {
-    s.px = map(noise(s.noiseOffset + frameCount * 0.003), 0, 1, -50, 50);
-    s.py = map(noise(s.noiseOffset + 100 + frameCount * 0.003), 0, 1, -50, 50);
+    s.px = map(noise(s.noiseOffset + frameCount * 0.008), 0, 1, -50, 50);
+    s.py = map(noise(s.noiseOffset + 100 + frameCount * 0.008), 0, 1, -50, 50);
     let tw = sin(frameCount * s.twinkleSpeed + s.twinkleOffset);
     let n = noise(s.noiseOffset + frameCount * 0.003);  // Perlin noise, slow change
     let alpha = map(tw, -1, 1, 80, s.bright) * map(n, 0, 1, 0.5, 1.2);
