@@ -83,8 +83,8 @@ function draw() {
       fill(200, 220, 255, 18);
       ellipse(s.x, s.y, sz * 4, sz * 4);
     }
-    let dist = dist(mouseX, mouseY, s.x, s.y);
-    let influence = map(dist, 0, 200, 1, 0, true);
+    let d = dist(mouseX, mouseY, s.x, s.y);
+    let influence = map(d, 0, 200, 1, 0, true);
     let nx = map(noise(s.noiseOffset + frameCount * 0.005), 0, 1, -8, 8) * influence;
     let ny = map(noise(s.noiseOffset + 100 + frameCount * 0.005), 0, 1, -8, 8) * influence;
     fill(210, 225, 255, alpha);
