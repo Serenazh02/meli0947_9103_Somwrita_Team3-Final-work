@@ -19,7 +19,9 @@ function initScene() {
       bright: random(150, 255),
       twinkleSpeed: random(0.01, 0.04),
       twinkleOffset: random(TWO_PI),
-      noiseOffset: random(1000) // Each star's independent noise seed
+      noiseOffset: random(1000), // Each star's independent noise seed
+      px: 0,  // 当前x偏移
+      py: 0   // 当前y偏移
     });
   }
 
@@ -75,6 +77,8 @@ function draw() {
 
   noStroke();
   for (let s of stars) {
+    s.px = map(noise(s.noiseOffset + frameCount * 0.003), 0, 1, -6, 6);
+    s.py = map(noise(s.noiseOffset + 100 + frameCount * 0.003), 0, 1, -6, 6);
     let tw = sin(frameCount * s.twinkleSpeed + s.twinkleOffset);
     let n = noise(s.noiseOffset + frameCount * 0.003);  // Perlin noise, slow change
     let alpha = map(tw, -1, 1, 80, s.bright) * map(n, 0, 1, 0.5, 1.2);
@@ -83,12 +87,8 @@ function draw() {
       fill(200, 220, 255, 18);
       ellipse(s.x, s.y, sz * 4, sz * 4);
     }
-    let d = dist(mouseX, mouseY, s.x, s.y);
-    let influence = map(d, 0, 200, 1, 0, true);
-    let nx = map(noise(s.noiseOffset + frameCount * 0.005), 0, 1, -8, 8) * influence;
-    let ny = map(noise(s.noiseOffset + 100 + frameCount * 0.005), 0, 1, -8, 8) * influence;
     fill(210, 225, 255, alpha);
-    ellipse(s.x + nx, s.y + ny, sz, sz);
+    ellipse(s.x + s.px, s.y + s.py, sz, sz);
     if (s.size > 2.2 && tw > 0.5) {
       stroke(220, 235, 255, alpha * 0.6);
       strokeWeight(0.5);
