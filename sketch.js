@@ -76,8 +76,9 @@ function draw() {
   noStroke();
   for (let s of stars) {
     let tw = sin(frameCount * s.twinkleSpeed + s.twinkleOffset);
-    let alpha = map(tw, -1, 1, 80, s.bright);
-    let sz = s.size + map(tw, -1, 1, 0, 0.8);
+    let n = noise(s.noiseOffset + frameCount * 0.003);  // Perlin noise, slow change
+    let alpha = map(tw, -1, 1, 80, s.bright) * map(n, 0, 1, 0.5, 1.2);
+    let sz = s.size + map(tw, -1, 1, 0, 0.8) + map(n, 0, 1, -0.3, 0.5);
     if (s.size > 1.8) {
       fill(200, 220, 255, 18);
       ellipse(s.x, s.y, sz * 4, sz * 4);
